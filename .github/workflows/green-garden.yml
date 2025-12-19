@@ -1,4 +1,4 @@
-name: 🌿 Green Garden Auto Commit
+name: Green Garden Auto Commit
 
 on:
   schedule:
@@ -18,12 +18,14 @@ jobs:
 
       - name: Water the plant (update existing file)
         run: |
-          echo "🌱 Plant watered: $(date '+%Y-%m-%d %H:%M:%S')" >> text.txt
+          export LANG=en_US.UTF-8
+          export LC_ALL=en_US.UTF-8
+          echo -e "Plant watered: $(date '+%Y-%m-%d %H:%M:%S')" >> text.txt
 
       - name: Commit and Push
         run: |
           git config user.name "buildwithzee"
           git config user.email "buildwithzee@gmail.com"
           git add text.txt
-          git diff --cached --quiet || git commit -m "🌿 Watered the garden at $(date '+%Y-%m-%d %H:%M:%S')"
+          git diff --cached --quiet || git commit -m "Watered the garden at $(date '+%Y-%m-%d %H:%M:%S')"
           git push
