@@ -5,6 +5,9 @@ on:
     - cron: '*/10 * * * *'  
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   garden:
     runs-on: ubuntu-latest
@@ -13,12 +16,11 @@ jobs:
 
       - name: Water the plant (update existing file)
         run: |
-          echo "🌱 Plant watered: $(date '+%Y-%m-%d %H:%M:%S')" >> new-daily/text.txt
+          echo "🌱 Plant watered: $(date '+%Y-%m-%d %H:%M:%S')" >> text.txt
 
       - name: Commit and Push
         run: |
           git config --global user.name "buildwithzee"
           git config --global user.email "buildwithzee@gmail.com"
-          git add new-daily/text.txt
+          git add text.txt
           git commit -m "🌿 Watered the garden at $(date '+%Y-%m-%d %H:%M:%S')"
-          git push
